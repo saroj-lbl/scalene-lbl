@@ -69,15 +69,6 @@
         position: absolute;
     }
     </style>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JXPHEBMTY"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      
-      gtag('config', 'G-4JXPHEBMTY');
-    </script>
 
     <script>
       const profile = {{ profile }}
@@ -112,6 +103,42 @@
           <option value="local">Local</option>
     </select>
 <hr />
+
+<!-- CBORG API Key Field -->
+<div id="cborg-fields">
+
+  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+    <label for="api-key" style="font-size: 0.8rem; width: 150px;">
+      CBORG <a href="https://cborg.lbl.gov/api_request">API key</a>:
+    </label>
+    <input
+      type="password"
+      style="font-size: 0.8rem; flex: 1;"
+      size="22"
+      placeholder="(CBORG API key)"
+      id="cborg-api-key"
+      oninput="checkApiKey(event.target.value)"
+    />
+    <span id="valid-api-key"></span>
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+    <label for="language-model-cborg" style="font-size: 0.8rem; width: 150px;">
+      Language model:
+    </label>
+    <select
+      style="font-size: 0.8rem; flex: 1;"
+      id="language-model-cborg"
+      class="persistent"
+      name="language-model-cborg-label"
+    >
+      <option value="openai/gpt-4o" selected>GPT-4o</option>
+      <option value="lbl/cborg-coder:latest">CBORG Coder</option>
+      <option value="anthropic/calude:latest">Anthropic Claude</option>
+    </select>
+  </div>
+
+</div>
 
 <!-- OpenAI API Key Field -->
 <div id="openai-fields">

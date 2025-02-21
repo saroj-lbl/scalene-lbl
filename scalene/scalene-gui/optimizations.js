@@ -1,3 +1,4 @@
+import { sendPromptToCBORG } from "./cborg";
 import { sendPromptToOpenAI } from "./openai";
 import { sendPromptToOllama } from "./ollama";
 import { sendPromptToAmazon } from "./amazon";
@@ -6,7 +7,7 @@ import { sendPromptToAzureOpenAI } from "./azure";
 import { countSpaces } from "./utils";
 import { isValidApiKey } from "./openai";
 
-import { WhiteLightning, WhiteExplosion} from "./gui-elements";
+import { WhiteLightning, WhiteExplosion } from "./gui-elements";
 
 async function copyOnClick(event, message) {
   event.preventDefault();
@@ -56,8 +57,8 @@ function generateScaleneOptimizedCodeRequest(
   sourceCode,
   line,
   recommendedLibraries = [],
-    includeGpuOptimizations = false,
-    GPUdeviceName = "GPU",
+  includeGpuOptimizations = false,
+  GPUdeviceName = "GPU",
 ) {
   // Default high-performance libraries known for their efficiency
   const defaultLibraries = [
@@ -80,7 +81,7 @@ function generateScaleneOptimizedCodeRequest(
     "Rewrite the above Python code from 'Start of code' to 'End of code', aiming for clear and simple optimizations. ",
     "Your output should consist only of valid Python code, with brief explanatory comments prefaced with #. ",
     "Include a detailed explanatory comment before the code, starting with '# Proposed optimization:'. ",
-      `Leverage high-performance native libraries, especially those utilizing ${GPUdeviceName}, for significant performance improvements. `,
+    `Leverage high-performance native libraries, especially those utilizing ${GPUdeviceName}, for significant performance improvements. `,
     "Consider using the following other libraries, if appropriate:\n",
     highPerformanceLibraries.map((e) => "  import " + e).join("\n") + "\n",
     "Eliminate as many for loops, while loops, and list or dict comprehensions as possible, replacing them with vectorized equivalents. ",
@@ -95,7 +96,7 @@ function generateScaleneOptimizedCodeRequest(
   // Conditional inclusion of GPU optimizations
   if (includeGpuOptimizations) {
     promptParts.push(
-	`Use ${GPUdeviceName}-accelerated libraries whenever it would substantially increase performance. `,
+      `Use ${GPUdeviceName}-accelerated libraries whenever it would substantially increase performance. `,
     );
   }
 
@@ -180,7 +181,7 @@ export async function optimizeCode(imports, code, line, context) {
   // TODO: remove anything already imported in imports
 
   const GPUdeviceName = document.getElementById("accelerator-name").innerHTML || "GPU";
-    
+
   const bigPrompt = generateScaleneOptimizedCodeRequest(
     context,
     code,
@@ -190,8 +191,8 @@ export async function optimizeCode(imports, code, line, context) {
     GPUdeviceName
   );
 
-  
-    const useGPUstring = useGPUs ? ` or ${GPUdeviceName}-optimizations ` : " ";
+
+  const useGPUstring = useGPUs ? ` or ${GPUdeviceName}-optimizations ` : " ";
   // Check for a valid API key.
   // TODO: Add checks for Amazon / local
   let apiKey = "";
@@ -243,6 +244,14 @@ export async function optimizeCode(imports, code, line, context) {
   prompt = bigPrompt;
 
   switch (document.getElementById("service-select").value) {
+    case "cborg": {
+      console.log(prompt);
+      const result = await sendPromptToCBORG(
+        prompt,
+        apiKey,
+      );
+      return extractCode(result);
+    }
     case "openai": {
       console.log(prompt);
       const result = await sendPromptToOpenAI(

@@ -1,5 +1,5 @@
 [project]
-name = "scalene"
+name = "scalene-lbl"
 description = "Scalene: A high-resolution, low-overhead CPU, GPU, and memory profiler for Python with AI-powered optimization suggestions"
 readme = "README.md"
 keywords = ["performance", "profiler", "optimization", "CPU", "GPU", "memory", "LLM"]
@@ -51,7 +51,7 @@ dynamic = ["version"]   # computed by setup.py
 "Repository" = "https://github.com/plasma-umass/scalene"
 
 [project.scripts]
-scalene = "scalene.__main__:main"
+scalene-lbl = "scalene.__main__:main"
 
 [build-system]
 build-backend = "setuptools.build_meta"
