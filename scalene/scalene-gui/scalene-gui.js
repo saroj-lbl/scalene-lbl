@@ -6,8 +6,10 @@ import { Prism } from "./prism";
 import Tablesort from "./tablesort";
 import { proposeOptimization } from "./optimizations";
 import { unescapeUnicode, memory_consumed_str, time_consumed_str } from "./utils";
-import { makeBar, makeGPUPie, makeMemoryPie, makeMemoryBar, makeSparkline,
-	 Lightning, Explosion, RightTriangle, DownTriangle, WhiteLightning, WhiteExplosion} from "./gui-elements";
+import {
+  makeBar, makeGPUPie, makeMemoryPie, makeMemoryBar, makeSparkline,
+  Lightning, Explosion, RightTriangle, DownTriangle, WhiteLightning, WhiteExplosion
+} from "./gui-elements";
 import { checkApiKey } from "./openai";
 import { fetchModelNames } from "./ollama";
 import { observeDOM, processPersistentElements } from "./persistence";
@@ -125,9 +127,8 @@ function makeTableHeader(fname, gpu, gpu_device, memory, params) {
   for (const col of columns) {
     s += `<th class="F${escape(
       fname,
-    )}-nonline"><font style="font-variant: small-caps; text-decoration: underline; width:${
-      col.width
-    }" color=${col.color}>`;
+    )}-nonline"><font style="font-variant: small-caps; text-decoration: underline; width:${col.width
+      }" color=${col.color}>`;
     if (col.info) {
       s += `<a style="cursor:pointer;" title="${col.info}">${col.title[0]}</a>`;
     } else {
@@ -141,9 +142,8 @@ function makeTableHeader(fname, gpu, gpu_device, memory, params) {
   } else {
     id = "lineProfile";
   }
-  s += `<th id=${
-    escape(fname) + "-" + id
-  } style="width:10000"><font style="font-variant: small-caps; text-decoration: underline">${tableTitle}</font><font style="font-size:small; font-style: italic">&nbsp; (click to reset order)</font></th>`;
+  s += `<th id=${escape(fname) + "-" + id
+    } style="width:10000"><font style="font-variant: small-caps; text-decoration: underline">${tableTitle}</font><font style="font-size:small; font-style: italic">&nbsp; (click to reset order)</font></th>`;
   s += "</tr>";
   s += '<tr data-sort-method="thead">';
   for (const col of columns) {
@@ -345,8 +345,8 @@ function makeProfileLine(
       memory_activity.push(
         makeMemoryPie(
           100 *
-            line.n_usage_fraction *
-            (1 - parseFloat(line.n_python_fraction)),
+          line.n_usage_fraction *
+          (1 - parseFloat(line.n_python_fraction)),
           100 * line.n_usage_fraction * parseFloat(line.n_python_fraction),
           { width: 30 },
         ),
@@ -398,18 +398,15 @@ function makeProfileLine(
   }
   const empty_profile =
     total_time ||
-    has_memory_results ||
-    has_gpu_results ||
-    end_region_line != start_region_line
+      has_memory_results ||
+      has_gpu_results ||
+      end_region_line != start_region_line
       ? ""
       : "empty-profile";
-  s += `<td align="right" class="dummy ${empty_profile}" style="vertical-align: middle; width: 50" data-sort="${
-    line.lineno
-  }"><span onclick="vsNavigate('${escape(filename)}',${
-    line.lineno
-  })"><font color="gray" style="font-size: 70%; vertical-align: middle" >${
-    line.lineno
-  }&nbsp;</font></span></td>`;
+  s += `<td align="right" class="dummy ${empty_profile}" style="vertical-align: middle; width: 50" data-sort="${line.lineno
+    }"><span onclick="vsNavigate('${escape(filename)}',${line.lineno
+    })"><font color="gray" style="font-size: 70%; vertical-align: middle" >${line.lineno
+    }&nbsp;</font></span></td>`;
 
   const regionOptimizationString =
     propose_optimizations && showExplosion
@@ -718,10 +715,10 @@ async function display(prof) {
     s += `<font style="font-size: 90%">% of time = ${ff[1].percent_cpu_time
       .toFixed(1)
       .padWithNonBreakingSpaces(5)}% (${time_consumed_str(
-      (ff[1].percent_cpu_time / 100.0) * prof.elapsed_time_sec * 1e3,
-    ).padWithNonBreakingSpaces(8)} / ${time_consumed_str(
-      prof.elapsed_time_sec * 1e3,
-    ).padWithNonBreakingSpaces(8)})<br />`;
+        (ff[1].percent_cpu_time / 100.0) * prof.elapsed_time_sec * 1e3,
+      ).padWithNonBreakingSpaces(8)} / ${time_consumed_str(
+        prof.elapsed_time_sec * 1e3,
+      ).padWithNonBreakingSpaces(8)})<br />`;
     s += `<span id="button-${id}" title="Click to show or hide profile." style="cursor: pointer; color: blue;" onClick="toggleDisplay('${id}')">`;
     s += `${triangle}`;
     s += "</span>";
@@ -749,9 +746,8 @@ async function display(prof) {
           }
           s += `<td class="F${escape(
             ff[0],
-          )}-blankline" style="line-height: 1px; background-color: lightgray" data-sort="${
-            prevLineno + 1
-          }">&nbsp;</td>`;
+          )}-blankline" style="line-height: 1px; background-color: lightgray" data-sort="${prevLineno + 1
+            }">&nbsp;</td>`;
           s += "</tr>";
         }
       }
@@ -920,6 +916,8 @@ export function loadDemo() {
 export function toggleServiceFields() {
   let service = document.getElementById("service-select").value;
   window.localStorage.setItem("scalene-service-select", service);
+  document.getElementById("cborg-fields").style.display =
+    service === "cborg" ? "block" : "none";
   document.getElementById("openai-fields").style.display =
     service === "openai" ? "block" : "none";
   document.getElementById("amazon-fields").style.display =
@@ -957,9 +955,9 @@ function createSelectElement(modelNames) {
 }
 
 function replaceDivWithSelect() {
-    const local_ip = document.getElementById("local-ip").value;
-    const local_port = document.getElementById("local-port").value;
-    fetchModelNames(local_ip, local_port, revealInstallMessage).then((modelNames) => {
+  const local_ip = document.getElementById("local-ip").value;
+  const local_port = document.getElementById("local-port").value;
+  fetchModelNames(local_ip, local_port, revealInstallMessage).then((modelNames) => {
     // Create the select element with options
     const selectElement = createSelectElement(modelNames);
 
