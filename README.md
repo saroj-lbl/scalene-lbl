@@ -26,11 +26,15 @@ profilers while delivering far more detailed information. It is also
 the first profiler ever to incorporate AI-powered proposed
 optimizations.
 
-### AI-powered optimization suggestions
+### About scalene-lbl
+
+`scalene-lbl` is a fork of `scalene` for LBL users so that the output of scalene profiler can be used with `CBORG` to generate AI-powered optimization suggestions. 
+
+### CBORG-powered optimization suggestions
 
 > **Note**
 >
-> To enable AI-powered optimization suggestions, you need to enter an [OpenAI key](https://openai.com/api/) in the box under "Advanced options". _Your account will need to have a positive balance for this to work_ (check your balance at https://platform.openai.com/account/usage).
+> To enable CBORG-powered optimization suggestions, you need to enter an [CBORG API key](https://openai.com/api/) in the box under "Advanced options". _Your account will need to have a positive balance for this to work_ (check your balance at https://platform.openai.com/account/usage).
 >
 > <img width="487" alt="Scalene advanced options" src="https://user-images.githubusercontent.com/1612723/211639253-ec926b38-3efe-4a20-8514-e10dde94ec01.png">
 
@@ -42,17 +46,12 @@ You can click as many times as you like on the lightning bolt or explosion, and 
   
 ### Quick Start
 
-#### Installing Scalene:
+#### Installing `scalene-lbl`:
 
 ```console
-python3 -m pip install -U scalene
+python3 -m pip install -U git+https://github.com/lbnl-science-it/scalene-lbl.git
 ```
 
-or
-
-```console
-conda install -c conda-forge scalene
-```
 
 #### Using Scalene:
 

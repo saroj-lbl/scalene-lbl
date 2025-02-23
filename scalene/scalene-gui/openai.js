@@ -1,5 +1,5 @@
 async function tryApi(apiKey) {
-  const response = await fetch("https://api.openai.com/v1/completions", {
+  const response = await fetch("https://api.cborg.lbl.gov/completions", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -15,12 +15,12 @@ export async function isValidApiKey(apiKey) {
   if (
     data.error &&
     data.error.code in
-      {
-        invalid_api_key: true,
-        invalid_request_error: true,
-        model_not_found: true,
-        insufficient_quota: true,
-      }
+    {
+      invalid_api_key: true,
+      invalid_request_error: true,
+      model_not_found: true,
+      insufficient_quota: true,
+    }
   ) {
     return false;
   } else {
@@ -50,7 +50,7 @@ export function checkApiKey(apiKey) {
 }
 
 export async function sendPromptToOpenAI(prompt, apiKey) {
-  const endpoint = "https://api.openai.com/v1/chat/completions";
+  const endpoint = "https://api.cborg.lbl.gov/chat/completions";
   const model = document.getElementById("language-model-openai").value;
 
   const body = JSON.stringify({

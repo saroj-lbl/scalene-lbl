@@ -916,8 +916,6 @@ export function loadDemo() {
 export function toggleServiceFields() {
   let service = document.getElementById("service-select").value;
   window.localStorage.setItem("scalene-service-select", service);
-  document.getElementById("cborg-fields").style.display =
-    service === "cborg" ? "block" : "none";
   document.getElementById("openai-fields").style.display =
     service === "openai" ? "block" : "none";
   document.getElementById("amazon-fields").style.display =

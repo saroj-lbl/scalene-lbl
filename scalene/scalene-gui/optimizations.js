@@ -1,4 +1,3 @@
-import { sendPromptToCBORG } from "./cborg";
 import { sendPromptToOpenAI } from "./openai";
 import { sendPromptToOllama } from "./ollama";
 import { sendPromptToAmazon } from "./amazon";
@@ -244,14 +243,6 @@ export async function optimizeCode(imports, code, line, context) {
   prompt = bigPrompt;
 
   switch (document.getElementById("service-select").value) {
-    case "cborg": {
-      console.log(prompt);
-      const result = await sendPromptToCBORG(
-        prompt,
-        apiKey,
-      );
-      return extractCode(result);
-    }
     case "openai": {
       console.log(prompt);
       const result = await sendPromptToOpenAI(

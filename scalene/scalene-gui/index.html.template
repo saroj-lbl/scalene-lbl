@@ -97,15 +97,15 @@
 	  -->
         <label for="service-select" style="font-size: 0.8rem">AI service provider:</label>
         <select style="font-size: 0.8rem" id="service-select" class="persistent" onchange="toggleServiceFields()">
-          <option value="openai">OpenAI</span></option>
+          <option value="openai">CBORG</span></option>
           <option value="amazon">Amazon Bedrock</option>
           <option value="azure-openai">Azure OpenAI</option>
           <option value="local">Local</option>
     </select>
 <hr />
 
-<!-- CBORG API Key Field -->
-<div id="cborg-fields">
+<!-- OpenAI API Key Field -->
+<div id="openai-fields" style="display: none;">
 
   <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
     <label for="api-key" style="font-size: 0.8rem; width: 150px;">
@@ -116,42 +116,6 @@
       style="font-size: 0.8rem; flex: 1;"
       size="22"
       placeholder="(CBORG API key)"
-      id="cborg-api-key"
-      oninput="checkApiKey(event.target.value)"
-    />
-    <span id="valid-api-key"></span>
-  </div>
-
-  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
-    <label for="language-model-cborg" style="font-size: 0.8rem; width: 150px;">
-      Language model:
-    </label>
-    <select
-      style="font-size: 0.8rem; flex: 1;"
-      id="language-model-cborg"
-      class="persistent"
-      name="language-model-cborg-label"
-    >
-      <option value="openai/gpt-4o" selected>GPT-4o</option>
-      <option value="lbl/cborg-coder:latest">CBORG Coder</option>
-      <option value="anthropic/calude:latest">Anthropic Claude</option>
-    </select>
-  </div>
-
-</div>
-
-<!-- OpenAI API Key Field -->
-<div id="openai-fields">
-
-  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
-    <label for="api-key" style="font-size: 0.8rem; width: 150px;">
-      OpenAI <a href="https://beta.openai.com/signup">API key</a>:
-    </label>
-    <input
-      type="text"
-      style="font-size: 0.8rem; flex: 1;"
-      size="22"
-      placeholder="(OpenAI API key)"
       id="api-key"
       oninput="checkApiKey(event.target.value)"
     />
@@ -168,9 +132,9 @@
       class="persistent"
       name="language-model-openai-label"
     >
-      <option value="gpt-4o" selected>GPT-4o</option>
-      <option value="gpt-4">GPT 4</option>
-      <option value="gpt-3.5-turbo">GPT 3.5</option>
+      <option value="openai/gpt-4o" selected>GPT-4o</option>
+      <option value="lbl/cborg-coder:latest">CBORG Coder</option>
+      <option value="anthropic/claude:latest">Anthropic Claude</option>
     </select>
   </div>
 
